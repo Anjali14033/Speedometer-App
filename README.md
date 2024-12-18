@@ -24,6 +24,15 @@ The system consists of the following components:
 
 - Stores speed and timestamp data sent from the Frontend for persistent storage.
 
+#Dockerized Deployment
+
+Each component (backend and frontend) is containerized with a Dockerfile.
+
+Ensures consistent deployment across environments.
+
+![sourcse code](https://github.com/user-attachments/assets/ece4d098-219b-417a-87f3-bcbd2b514194)
+
+
 ## System Flow
 
 - **Frontend:**
@@ -67,26 +76,57 @@ INSERT INTO speed_data (speed, timestamp) VALUES (%s, %s);
 ![HLL Diagram](https://github.com/user-attachments/assets/f8a7009b-f2f8-4f79-a932-09f1af86c32e)
 
 
+## Backend API
+- WebSocket API (ws://localhost:8765)
+- The backend WebSocket server listens for connections at ws://localhost:8765. Each connection is assigned a unique ID.
+
+Message Format:
+The frontend sends data in the following format:
+
+-- JSON
+## {
+  ## "speed": <speed_value>,
+##   "timestamp": <current_time>
+## }
+
+Action on Data:
+Upon receiving the data, the backend stores it in the MySQL database and sends the same data back to the sender.
+
+
+
+## HTTP API (POST http://localhost:8765/send)
+- The backend also provides an HTTP endpoint to send speed data to specific WebSocket connections. This API can be used for debugging or if you need to send data from other sources.
+
+- ## {
+  ## "connection_id": <connection_id>,
+  ## "speed": <speed_value>,
+  ## "timestamp": <current_time>
+## } 
+
+## Challenges Addressed:
+
+- Real-time data flow between client and server.
+
+- Persistent storage of data for future analysis.
+
+- Scalability and environment consistency with Docker.
+
+## Opportunities Exploited:
+
+- Utilizing WebSockets for low-latency communication.
+
+- Leveraging MySQL for robust data management.
+
+- Streamlining deployment with Docker.
+
+
+## CONCLUSION:
+This project demonstrates a simple speedometer system using React for the frontend, Flask for the backend with WebSocket support, and MySQL for persistent data storage. The WebSocket connection allows real-time data communication between the frontend and backend, while MySQL stores the speed data with timestamps for future reference.
+  
 
 
 
 
 
-
-
-
-
-
-
-## Technologies Used
-
-- **Streamlit:** For creating the web application interface.
-- **Google Generative AI (Gemini Pro Vision):** For processing and analyzing the resume content.
-- **Python:** The primary programming language used for backend development.
-- **PYPDF2:** #Python package that allows you to work with PDF files.
-            - #It provides functionalities for reading, manipulating, and extracting information from PDF documents
-
-
----
 
 
