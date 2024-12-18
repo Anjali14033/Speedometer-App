@@ -50,7 +50,11 @@ When it receives data from a client (React app), it stores the data in the MySQL
 
 Each speed data received from the Frontend is stored with a timestamp for persistence.
 
-![Web flow](https://github.com/user-attachments/assets/42afeb68-40c1-479e-bc53-ad7288ed5627)
+
+
+![HLL Diagram](https://github.com/user-attachments/assets/f8a7009b-f2f8-4f79-a932-09f1af86c32e)
+
+
 
 
 
@@ -73,7 +77,8 @@ Copy code
 INSERT INTO speed_data (speed, timestamp) VALUES (%s, %s);
 
 
-![HLL Diagram](https://github.com/user-attachments/assets/f8a7009b-f2f8-4f79-a932-09f1af86c32e)
+
+![Web flow](https://github.com/user-attachments/assets/42afeb68-40c1-479e-bc53-ad7288ed5627)
 
 
 ## Backend API
@@ -103,15 +108,21 @@ Upon receiving the data, the backend stores it in the MySQL database and sends t
   ## "timestamp": <current_time>
 ## } 
 
-## Challenges Addressed:
+## Challenges:
 
+- Handling WebSocket disconnections gracefully.
+ 
 - Real-time data flow between client and server.
 
 - Persistent storage of data for future analysis.
 
-- Scalability and environment consistency with Docker.
+- Scalability and environment consistency with Docker
 
-## Opportunities Exploited:
+- Ensuring database performance with real-time data insertion.
+
+## Opportunities:
+
+- Adding user authentication for secure data access.
 
 - Utilizing WebSockets for low-latency communication.
 
@@ -119,14 +130,15 @@ Upon receiving the data, the backend stores it in the MySQL database and sends t
 
 - Streamlining deployment with Docker.
 
+## Future Enhancements
+
+- Support for multi-client WebSocket connections.
+
+- Advanced data analytics and reporting.
+
+- Real-time alerts for anomalous speed patterns
+
 
 ## CONCLUSION:
 This project demonstrates a simple speedometer system using React for the frontend, Flask for the backend with WebSocket support, and MySQL for persistent data storage. The WebSocket connection allows real-time data communication between the frontend and backend, while MySQL stores the speed data with timestamps for future reference.
   
-
-
-
-
-
-
-
